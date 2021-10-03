@@ -25,9 +25,10 @@ public class InvoiceController {
 
     @GetMapping
     public ResponseEntity<?> downloadInvoice(){
-        return ResponseEntity
+        /*return ResponseEntity
                 .status(HttpStatus.MOVED_PERMANENTLY)
-                .header(HttpHeaders.LOCATION, invoiceService.downloadInvoice(null))
-                .build();
+                .header(HttpHeaders.LOCATION, invoiceService.downloadInvoice())
+                .build();*/
+        return ResponseEntity.ok(invoiceService.downloadInvoice());
     }
 }

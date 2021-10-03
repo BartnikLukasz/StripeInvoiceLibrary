@@ -11,10 +11,10 @@ import java.util.Map;
 @Service
 public class InvoiceItemService {
 
-    public void createInvoiceItem(Customer customer){
+    public void createInvoiceItem(String customerId){
 
         Map<String, Object> paramsItem = new HashMap<>();
-        paramsItem.put("customer", customer.getId());
+        paramsItem.put("customer", customerId);
         paramsItem.put("amount", 1);
         paramsItem.put("currency", "usd");
 
