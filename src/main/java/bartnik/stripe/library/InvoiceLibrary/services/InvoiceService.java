@@ -8,12 +8,14 @@ import com.stripe.model.Invoice;
 import com.stripe.model.InvoiceItem;
 import com.stripe.net.ApiResource;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class InvoiceService {
@@ -35,7 +37,7 @@ public class InvoiceService {
         try {
             invoice = Invoice.create(params);
         } catch (StripeException e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
 
         return ApiResource.GSON.toJson(invoice);
@@ -51,10 +53,9 @@ public class InvoiceService {
         params.put("customer", userDetails.getCustomerId());
 
         try {
-            System.out.println(Invoice.list(params));
             return Invoice.list(params).getData().get(0).getInvoicePdf();
         } catch (StripeException e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
         return "err";
     }
