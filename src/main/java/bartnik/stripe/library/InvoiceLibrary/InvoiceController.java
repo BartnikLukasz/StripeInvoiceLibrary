@@ -1,8 +1,11 @@
 package bartnik.stripe.library.InvoiceLibrary;
 
+import bartnik.stripe.library.InvoiceLibrary.config.MessageProvider;
 import bartnik.stripe.library.InvoiceLibrary.services.InvoiceService;
+import com.stripe.exception.StripeException;
 import com.stripe.model.Invoice;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,18 +20,24 @@ import org.springframework.web.bind.annotation.RestController;
 public class InvoiceController {
 
     private final InvoiceService invoiceService;
+    private final MessageProvider messageProvider;
 
     @PostMapping
-    public ResponseEntity<String> createInvoice(){
-        return ResponseEntity.ok(invoiceService.createInvoice());
+    public ResponseEntity<String> createInvoice() {
+        try {
+            System.out.println();
+            return ResponseEntity.ok(StringUtils.join(messageProvider.getSuccess().get("invoiceCreated"), invoiceService.createInvoice()));
+        } catch (StripeException e) {
+            return ResponseEntity.status(HttpStatus.VARIANT_ALSO_NEGOTIATES).body(StringUtils.join(messageProvider.getError().get("stripeDefault"), e.getMessage()));
+        }
     }
 
     @GetMapping
-    public ResponseEntity<?> downloadInvoice(){
-        /*return ResponseEntity
-                .status(HttpStatus.MOVED_PERMANENTLY)
-                .header(HttpHeaders.LOCATION, invoiceService.downloadInvoice())
-                .build();*/
-        return ResponseEntity.ok(invoiceService.downloadInvoice());
+    public ResponseEntity<String> downloadInvoice() {
+        try {
+            return ResponseEntity.ok(invoiceService.downloadInvoice());
+        } catch (StripeException e) {
+            return ResponseEntity.status(HttpStatus.VARIANT_ALSO_NEGOTIATES).body(StringUtils.join(messageProvider.getError().get("stripeDefault"), e.getMessage()));
+        }
     }
 }

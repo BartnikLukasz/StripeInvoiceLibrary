@@ -13,19 +13,13 @@ import java.util.Map;
 @Service
 public class InvoiceItemService {
 
-    public void createInvoiceItem(String customerId){
+    public void createInvoiceItem(String customerId) throws StripeException {
 
         Map<String, Object> params = new HashMap<>();
         params.put("customer", customerId);
         params.put("amount", 1);
         params.put("currency", "usd");
 
-        InvoiceItem item = null;
-
-        try {
-            item = InvoiceItem.create(params);
-        } catch (StripeException e) {
-            log.error(e.getMessage(), e);
-        }
+        InvoiceItem.create(params);
     }
 }

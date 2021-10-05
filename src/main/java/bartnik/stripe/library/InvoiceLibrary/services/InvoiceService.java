@@ -1,7 +1,10 @@
 package bartnik.stripe.library.InvoiceLibrary.services;
 
+import bartnik.stripe.library.InvoiceLibrary.config.MessageProvider;
+import bartnik.stripe.library.InvoiceLibrary.config.StripeConfiguration;
 import bartnik.stripe.library.InvoiceLibrary.config.UserDetailsImpl;
 import com.stripe.Stripe;
+import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import com.stripe.model.Invoice;
@@ -9,9 +12,11 @@ import com.stripe.model.InvoiceItem;
 import com.stripe.net.ApiResource;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,41 +27,32 @@ public class InvoiceService {
 
     private final CustomerService customerService;
     private final InvoiceItemService invoiceItemService;
+    private final StripeConfiguration stripeConfiguration;
 
-    public String createInvoice() {
+    public String createInvoice() throws StripeException {
 
-        Stripe.apiKey = "sk_test_4eC39HqLyjWDarjtT1zdp7dc";
+        Stripe.apiKey = stripeConfiguration.getConfiguration().get("testKey");
 
-        UserDetailsImpl userDetails = (UserDetailsImpl)  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        invoiceItemService.createInvoiceItem(userDetails.getCustomerId());
+        invoiceItemService.createInvoiceItem(customerService.getCurrentCustomerId());
 
         Map<String, Object> params = new HashMap<>();
-        params.put("customer", userDetails.getCustomerId());
+        params.put("customer", customerService.getCurrentCustomerId());
 
-        Invoice invoice = null;
-        try {
-            invoice = Invoice.create(params);
-        } catch (StripeException e) {
-            log.error(e.getMessage(), e);
-        }
-
-        return ApiResource.GSON.toJson(invoice);
+        Invoice invoice = Invoice.create(params);
+        return invoice.getId();
     }
 
-    public String downloadInvoice(){
+    public String downloadInvoice() throws StripeException {
 
-        Stripe.apiKey = "sk_test_4eC39HqLyjWDarjtT1zdp7dc";
+        Stripe.apiKey = stripeConfiguration.getConfiguration().get("testKey");
 
-        UserDetailsImpl userDetails = (UserDetailsImpl)  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Map<String, Object> params = new HashMap<>();
         params.put("limit", 1);
         params.put("customer", userDetails.getCustomerId());
-
-        try {
-            return Invoice.list(params).getData().get(0).getInvoicePdf();
-        } catch (StripeException e) {
-            log.error(e.getMessage(), e);
-        }
-        return "err";
+        Invoice invoice = Invoice.list(params).getData().get(0);
+        invoice = invoice.finalizeInvoice();
+        System.out.println(invoice);
+        return invoice.getInvoicePdf();
     }
 }
