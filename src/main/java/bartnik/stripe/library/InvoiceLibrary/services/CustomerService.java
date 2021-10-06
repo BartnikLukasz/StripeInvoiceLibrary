@@ -1,6 +1,6 @@
 package bartnik.stripe.library.InvoiceLibrary.services;
 
-import bartnik.stripe.library.InvoiceLibrary.config.UserDetailsImpl;
+import bartnik.stripe.library.InvoiceLibrary.config.userdetails.UserDetailsImpl;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import lombok.extern.slf4j.Slf4j;
@@ -24,8 +24,8 @@ public class CustomerService {
         return Customer.create(params);
     }
 
-    public String getCurrentCustomerId(){
-        UserDetailsImpl userDetails = (UserDetailsImpl)  SecurityContextHolder
+    public String getCurrentCustomerId() {
+        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder
                 .getContext()
                 .getAuthentication()
                 .getPrincipal();

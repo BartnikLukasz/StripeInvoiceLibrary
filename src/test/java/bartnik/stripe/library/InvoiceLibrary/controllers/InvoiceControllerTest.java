@@ -1,22 +1,21 @@
-package bartnik.stripe.library.InvoiceLibrary;
+package bartnik.stripe.library.InvoiceLibrary.controllers;
 
-import bartnik.stripe.library.InvoiceLibrary.config.MessageProvider;
+import bartnik.stripe.library.InvoiceLibrary.config.resources.MessageProvider;
 import bartnik.stripe.library.InvoiceLibrary.services.InvoiceService;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.exception.StripeException;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = InvoiceController.class)
 class InvoiceControllerTest {
@@ -41,7 +40,7 @@ class InvoiceControllerTest {
                 .andExpect(status().isVariantAlsoNegotiates())
                 .andExpect(content().string("Error occurred during connection with Stripe API. Message: Exception message"));
     }
-    
+
     @Test
     void createInvoice_should_return_success_message() throws Exception {
         when(messageProvider.getError()).thenReturn(Map.of("stripeDefault", "Error occurred during connection with Stripe API. Message: "));

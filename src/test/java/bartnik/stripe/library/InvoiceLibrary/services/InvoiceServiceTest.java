@@ -1,8 +1,6 @@
 package bartnik.stripe.library.InvoiceLibrary.services;
 
-import bartnik.stripe.library.InvoiceLibrary.config.StripeConfiguration;
-import bartnik.stripe.library.InvoiceLibrary.config.UserDetailsImpl;
-import bartnik.stripe.library.InvoiceLibrary.model.UserEntity;
+import bartnik.stripe.library.InvoiceLibrary.config.resources.StripeConfiguration;
 import com.stripe.Stripe;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
@@ -10,16 +8,13 @@ import com.stripe.model.InvoiceItem;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)

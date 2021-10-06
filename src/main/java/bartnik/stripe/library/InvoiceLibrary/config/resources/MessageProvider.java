@@ -1,4 +1,4 @@
-package bartnik.stripe.library.InvoiceLibrary.config;
+package bartnik.stripe.library.InvoiceLibrary.config.resources;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,9 +11,10 @@ import java.util.Map;
 @Getter
 @Setter
 @Component
-@PropertySource("classpath:application.properties")
-@ConfigurationProperties(prefix = "stripe")
-public class StripeConfiguration {
+@PropertySource("classpath:messages.properties")
+@ConfigurationProperties(prefix = "message")
+public class MessageProvider {
 
-    private Map<String, String> configuration;
+    private Map<String, String> error;
+    private Map<String, String> success;
 }

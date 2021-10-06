@@ -1,7 +1,6 @@
 package bartnik.stripe.library.InvoiceLibrary.services;
 
 import com.stripe.exception.StripeException;
-import com.stripe.model.Customer;
 import com.stripe.model.InvoiceItem;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

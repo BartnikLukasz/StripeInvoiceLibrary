@@ -1,4 +1,4 @@
-package bartnik.stripe.library.InvoiceLibrary.config;
+package bartnik.stripe.library.InvoiceLibrary.config.userdetails;
 
 import bartnik.stripe.library.InvoiceLibrary.model.UserEntity;
 import bartnik.stripe.library.InvoiceLibrary.repositories.UserRepository;

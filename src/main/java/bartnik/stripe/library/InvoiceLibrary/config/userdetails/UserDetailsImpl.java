@@ -1,11 +1,10 @@
-package bartnik.stripe.library.InvoiceLibrary.config;
+package bartnik.stripe.library.InvoiceLibrary.config.userdetails;
 
 import bartnik.stripe.library.InvoiceLibrary.model.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -36,7 +35,7 @@ public class UserDetailsImpl implements UserDetails {
         return this.username;
     }
 
-    public String getCustomerId(){
+    public String getCustomerId() {
         return this.customerId;
     }
 

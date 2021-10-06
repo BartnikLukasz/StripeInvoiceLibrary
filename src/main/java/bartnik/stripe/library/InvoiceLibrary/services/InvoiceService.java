@@ -1,22 +1,13 @@
 package bartnik.stripe.library.InvoiceLibrary.services;
 
-import bartnik.stripe.library.InvoiceLibrary.config.MessageProvider;
-import bartnik.stripe.library.InvoiceLibrary.config.StripeConfiguration;
-import bartnik.stripe.library.InvoiceLibrary.config.UserDetailsImpl;
+import bartnik.stripe.library.InvoiceLibrary.config.resources.StripeConfiguration;
 import com.stripe.Stripe;
-import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
-import com.stripe.model.Customer;
 import com.stripe.model.Invoice;
-import com.stripe.model.InvoiceItem;
-import com.stripe.net.ApiResource;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.buf.StringUtils;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 

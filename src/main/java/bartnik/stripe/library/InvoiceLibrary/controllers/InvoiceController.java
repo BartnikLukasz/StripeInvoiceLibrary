@@ -1,12 +1,10 @@
-package bartnik.stripe.library.InvoiceLibrary;
+package bartnik.stripe.library.InvoiceLibrary.controllers;
 
-import bartnik.stripe.library.InvoiceLibrary.config.MessageProvider;
+import bartnik.stripe.library.InvoiceLibrary.config.resources.MessageProvider;
 import bartnik.stripe.library.InvoiceLibrary.services.InvoiceService;
 import com.stripe.exception.StripeException;
-import com.stripe.model.Invoice;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
