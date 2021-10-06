@@ -15,11 +15,11 @@ To test this applicaton I used Postman for making API calls. There are three fun
     URL: "localhost:8080/api"
 
 **Stack tech**
-  *Java 11.0.2
-  *Spring boot 2.5.5
-  *Apache Tomcat 9.0.53
-  *Stripe-java 20.79.0
-  *Gson 2.8.8
-  *Apache Commons Lang 3.12.0
-  *H2 Database 1.4.200
-  *Lombok
+  * Java 11.0.2
+  * Spring boot 2.5.5
+  * Apache Tomcat 9.0.53
+  * tripe-java 20.79.0
+  * Gson 2.8.8
+  * Apache Commons Lang 3.12.0
+  * H2 Database 1.4.200
+  * Lombok
