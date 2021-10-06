@@ -22,7 +22,7 @@ To test this applicaton I used Postman for making API calls. There are three fun
   * Java 11
   * Spring boot 2.5.5
   * Apache Tomcat 9.0.53
-  * tripe-java 20.79.0
+  * Stripe-java 20.79.0
   * Gson 2.8.8
   * Apache Commons Lang 3.12.0
   * H2 Database 1.4.200
