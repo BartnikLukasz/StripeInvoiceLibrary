@@ -21,6 +21,8 @@ To test this applicaton I used Postman for making API calls. There are three fun
 **Stack tech**
   * Java 11
   * Spring boot 2.5.5
+  * Hibernate 5.4.32.Final
+  * Apache Maven 3.8.2
   * Apache Tomcat 9.0.53
   * Stripe-java 20.79.0
   * Gson 2.8.8
