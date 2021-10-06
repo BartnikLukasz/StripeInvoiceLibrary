@@ -1,8 +1,8 @@
 # StripeInvoiceLibrary
 Application for managing invoices in Stripe API
-**Description**
+** Description **
 This application allows logged in user to create and download his invoice using Stripe API.
-**Usage**
+** Usage **
 To test this applicaton I used Postman for making API calls. There are three functionalities, that can be used.
   1. Logging in. Logging in can be done by making POST request at 
     URL: "localhost:8080/login"
