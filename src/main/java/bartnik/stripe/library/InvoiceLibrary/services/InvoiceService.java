@@ -46,13 +46,11 @@ public class InvoiceService {
 
         Stripe.apiKey = stripeConfiguration.getConfiguration().get("testKey");
 
-        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Map<String, Object> params = new HashMap<>();
         params.put("limit", 1);
-        params.put("customer", userDetails.getCustomerId());
+        params.put("customer", customerService.getCurrentCustomerId());
         Invoice invoice = Invoice.list(params).getData().get(0);
         invoice = invoice.finalizeInvoice();
-        System.out.println(invoice);
         return invoice.getInvoicePdf();
     }
 }

@@ -59,6 +59,18 @@ class InvoiceServiceTest {
         assertThrows(InvalidRequestException.class, () -> invoiceService.createInvoice());
     }
 
+    @Test
+    void downloadInvoice_should_return_link() throws StripeException {
+        createInvoiceItemForTest();
+        when(stripeConfiguration.getConfiguration()).thenReturn(Map.of("testKey", "sk_test_4eC39HqLyjWDarjtT1zdp7dc"));
+        when(customerService.getCurrentCustomerId()).thenReturn("cus_KL8NFlYryCK2kD");
+        invoiceService.createInvoice();
+        invoiceService.downloadInvoice();
+        verify(stripeConfiguration, times(2)).getConfiguration();
+        verify(customerService, times(3)).getCurrentCustomerId();
+        verify(invoiceItemService, times(1)).createInvoiceItem(anyString());
+    }
+
     void createInvoiceItemForTest() throws StripeException {
 
         Stripe.apiKey = "sk_test_4eC39HqLyjWDarjtT1zdp7dc";
