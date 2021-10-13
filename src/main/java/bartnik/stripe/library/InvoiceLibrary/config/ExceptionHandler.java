@@ -10,7 +10,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @RequiredArgsConstructor
 @ControllerAdvice
-public class ExceptionHandler extends ResponseEntityExceptionHandler {
+class ExceptionHandler extends ResponseEntityExceptionHandler {
 
     private final MessageProvider messageProvider;
 

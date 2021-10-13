@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")
-public class InvoiceController {
+class InvoiceController {
 
     private final InvoiceService invoiceService;
     private final MessageProvider messageProvider;
